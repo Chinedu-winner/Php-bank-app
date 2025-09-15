@@ -41,7 +41,7 @@
             <input class="form-control" type="text" id="">
         </div>
         <div>
-            <button class="btn btn-dark w-100">Register</button>
+            <button class="btn mt-2 btn-dark w-100">Register</button>
         </div>
     </form>
 </body>
