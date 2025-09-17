@@ -1,5 +1,18 @@
 <?php
+$email = "user@example.com";
+if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    echo "Valid email address.";
+} else {
+    echo "Invalid email address.";
+}
 
+
+$password = "MySecurePassword123!";
+// Hash the password
+// $hashedPassword = password_hash($password, PASSWORD_DEFAULT){
+    echo "Password is valid";
+// };
+echo "Hashed password: " . $hashedPassword;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,13 +23,7 @@
     <title>Document</title>
 </head>
 <body>
-    <?php include "components/navbar.html"?>
     <form class="w-50 m-auto mt-4 p-3 rounded shadow" action="auth/processForm.php" method="post">
-        <?php
-            if(isset($_GET['anything'])){
-                echo "<div class='alert alert-danger'>$_GET[anything]</div>";
-            }
-        ?>
         <h2>Register User</h2>
         <div>
             <label class="text-dark" for="">First name</label>
@@ -24,27 +31,27 @@
         </div>
         <div>
             <label class="text-dark" for="">Last name</label>
-            <input class="form-control" name="last_name" id="">
+            <input class="form-control" type="" id="">
         </div>
         <div>
-            <label class="text-dark" for="">Email</label>
-            <input class="form-control" name="email" id="">
-        </div>
-        <div>
-            <label class="text-dark" for="">Password</label>
-            <input class="form-control" name="password" id="">
+            <label class="text-dark" for="">password</label>
+            <input class="form-control" type="password" id="">
         </div>
         <div>
             <label class="text-dark" for="">Confirm password</label>
-            <input class="form-control" name="c_password" id="">
+            <input class="form-control" type="password" id="">
+        </div>
+        <div>
+            <label class="text-dark" for="">email</label>
+            <input class="form-control" type="email" required>
         </div>
         <div>
             <label class="text-dark" for="">DOB</label>
-            <input class="form-control" name="date" types="date" id="">
+            <input class="form-control" type="date" id="">
         </div>
         <div>
             <label class="text-dark" for="">Address</label>
-            <input class="form-control" name="text" id="">
+            <input class="form-control" type="text" id="">
         </div>
         <div>
             <button class="btn mt-2 btn-dark w-100">Register</button>

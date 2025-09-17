@@ -1,10 +1,55 @@
 <?php
 $fn = $_POST['first_name'];
-if(empty($fn)){
-    echo "First name is required";
+$ln = $_POST['last_name'];
+$email = $_POST['email'];
+$password = $_POST['password'];
+$c_password = $_POST['c_password'];
+
+function displayError($message){
+    header("Location: ../register.php?anything= $message");
+    exit();
 }
-echo $fn;
+if(empty($fn)){
+  displayError('First name is required');
+}
+if(empty($ln)){
+    displayError("Last name is required");
+}
+if(empty($email)){
+    header("Location: ../register.php?anything= Email is required");
+    exit();  
+}
+if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+    header("Location: ../register.php?anything= Your email is invalid");
+    exit();
+}; 
+if(!preg_match("/[a-z]/", $password)){ 
+    header("Location: ../register.php?anything= Your password must contain lowercase");
+    exit();
+}
+if(!preg_match("/[A-Z]/", $password)){ 
+    header("Location: ../register.php?anything= Your password must contain uppercase");
+    exit();
+}
+if(!preg_match("/[0-9]/", $password)){ 
+    header("Location: ../register.php?anything= Your password must contain at least one number");
+    exit();
+}
+if(!preg_match("/[@_$$*!+{}()]/", $password)){ 
+    header("Location: ../register.php?anything= Your password must contain at least one special character");
+    exit();
+}
+if ($password != $c_password){
+    header("Location: ../register.php?anything= Your password does not match");
+    exit();
+
+}
+session_start(); 
+$_SESSION['session_email'] = $email;
+$arr = ['Dan', 'Sam', 'Win'];
+header("Location:../login.php");
+// echo $fn;
 //Email_filter_var
 //password-hash => Hash your password
-// confirm yourc password
-//Displaygit
+// confirm your password
+ 
