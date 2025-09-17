@@ -49,7 +49,7 @@ $_SESSION['session_email'] = $email;
 $arr = ['Dan', 'Sam', 'Win'];
 header("Location:../login.php");
 // echo $fn;
-//Email_filter_var
+//Email_filter_var 
 //password-hash => Hash your password
 // confirm your password
  

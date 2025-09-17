@@ -42,7 +42,7 @@
             <label class="text-dark" for="">DOB</label>
             <input class="form-control" name="date" types="date" id="">
         </div>
-        <div>
+        <div>   
             <label class="text-dark" for="">Address</label>
             <input class="form-control" name="text" id="">
         </div>
