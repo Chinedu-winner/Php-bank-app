@@ -29,6 +29,7 @@ if(!preg_match("/[a-z]/", $password)){
 }
 if(!preg_match("/[A-Z]/", $password)){ 
     header("Location: ../register.php?anything= Your password must contain uppercase");
+    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
     exit();
 }
 if(!preg_match("/[0-9]/", $password)){ 
@@ -48,6 +49,7 @@ session_start();
 $_SESSION['session_email'] = $email;
 $arr = ['Dan', 'Sam', 'Win'];
 header("Location:../login.php");
+
 // echo $fn;
 //Email_filter_var 
 //password-hash => Hash your password
