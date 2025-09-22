@@ -47,7 +47,7 @@ if ($password != $c_password){
 session_start();
 $userDetails = ["email" => $email, 'password' =>$hased, "fn"=>$fn, "ln"=>$ln];
 $_SESSION['userDetails'] = $userDetails;
-header("Location:../login.php");
+header("Location: ../newFF/login.php");
 
 // echo $fn;
 //Email_filter_var 

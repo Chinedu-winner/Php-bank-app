@@ -3,8 +3,14 @@ session_start();
 $user = $_SESSION['userDetails'];
 print_r($user);
 
+function displayError($message){
+    header("Location:login.php?error=$message");
+    exit();
+};
+
+if (isset($_POST['login'])){
 $email = $POST['email'];
-$password= $_POST['email'];
+$password= $_POST['password'];
 
 if($email !== $user[0]['email']){
     echo "User email not correct";
@@ -16,6 +22,7 @@ if(!password_verify($password, $user['password'])){
     return;
     header("Location: dashboard.php");
 };
+}
 
 $text = "This is PHP class";
 echo bin2hex($text). '<br/>';
