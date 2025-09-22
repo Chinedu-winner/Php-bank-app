@@ -1,29 +1,33 @@
 <?php
-if (!isset($_SESSION['userData'])){
-    echo 'How did you get here? Please register';
-    exit();
-}
-$userData = $_SESSION['userData'];
-$savemail = $userData['email'];
-$hasedPassword = $userData['password'];
+session_start();
+$user = $_SESSION['userDetails'];
+print_r($user);
 
-$error = "";
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $email = trim($_POST['email']);
-    $password = $_POST['password'];
+$email = $POST['email'];
+$password= $_POST['email'];
 
-    if (empty($email) || empty($password)) {
-        $error = "Check it and Please fill out all the fields.";
-    } elseif ($email !== $savedEmail) {
-        $error = "Invalid Email, check well for mistakes.";
-    } elseif (!password_verify($password, $hashedPassword)) {
-        $error = "Your Password is incorrect.";
-    } else {
-        header("Location: dashboard.php");
-        exit;
-    }
+if($email !== $user[0]['email']){
+    echo "User email not correct";
+    // die; 
 }
+
+if(!password_verify($password, $user['password'])){
+    echo "User password not correct";
+    return;
+    header("Location: dashboard.php");
+};
+
+$text = "This is PHP class";
+echo bin2hex($text). '<br/>';
+echo random_bytes(16);
+
+$token = bin2hex(random_bytes(16));
+echo $token . "<br/>"; 
+$token_exp = time() + 30;
+echo time(); 
+$loggeredInUser = ["fn"=>$user['fn'], "ln"=>$user('ln'), 'token' =>$token, "token-exp"];
 ?>
+
 <DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <div class="col-lg-6 col-md-8 col-sm-12">
         <div class="card shadow-lg border-0 rounded-4">
           <div class="card-body p-5">
-            <h2 class="text-center mb-4 fw-bold text-primary">Login</h2>
+            <h1 class="text-center mb-4 fw-bold text-primary">Login</h1>
 
             <?php if (!empty($error)): ?>
               <div class="alert alert-danger"><?= htmlspecialchars($error) ?></div>
@@ -56,10 +60,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
               </div>
 
               <div class="col-12 d-grid mt-3">
-                <button type="submit" class="btn btn-primary btn-lg">Login</button>
+                <button type="login" class="btn btn-primary btn-lg">Login</button>
               </div>
             </form>
 
           </div>
         </div>
       </div>
+

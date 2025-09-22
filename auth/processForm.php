@@ -43,11 +43,10 @@ if(!preg_match("/[@_$$*!+{}()]/", $password)){
 if ($password != $c_password){
     header("Location: ../register.php?anything= Your password does not match");
     exit();
-
 }
-session_start(); 
-$_SESSION['session_email'] = $email;
-$arr = ['Dan', 'Sam', 'Win'];
+session_start();
+$userDetails = ["email" => $email, 'password' =>$hased, "fn"=>$fn, "ln"=>$ln];
+$_SESSION['userDetails'] = $userDetails;
 header("Location:../login.php");
 
 // echo $fn;

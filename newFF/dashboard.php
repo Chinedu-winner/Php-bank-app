@@ -1,11 +1,24 @@
 <?php
 session_reset();
+if(isset($_SESSION ['userDetails'])){
+   header("location: login.php?error=Please login");
+   return;
+}
+$user = $_SESSION['loggenin'];
+if (!$user['token'] || $user['token_exp'] <  time()) {
+    header("Location: login.php?error=token expired, Please login");
+    return; 
+}
+print_r($user); 
 
-if (isset($_SESSION['userData'])){
-    header("Location.php");
-    exit(); 
+if (isset($_SESSION['logout'])){
+   session_unset();
+   session_destroy();
+   header("Location: login.php");
 };
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,8 +28,10 @@ if (isset($_SESSION['userData'])){
     <title>Document</title>
 </head>
 <body>
-    <div class="container py-5 text-center">
-    <h1 class=" fw-bold text-bold">Welcome to the dashboard</h1>
+    <form action="">
+        <div class="container py-5 text-center">
+        <h1 class=" fw-bold text-bold">Welcome to the dashboard <?php echo "$user[fn] $user[ln]"?></h1>
+    </form>
 
     </div>
 </body>
