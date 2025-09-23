@@ -4,6 +4,7 @@ $ln = $_POST['last_name'];
 $email = $_POST['email'];
 $password = $_POST['password'];
 $c_password = $_POST['c_password'];
+$role = $_POST['role'];
 
 function displayError($message){
     header("Location: ../register.php?anything= $message");
@@ -44,10 +45,24 @@ if ($password != $c_password){
     header("Location: ../register.php?anything= Your password does not match");
     exit();
 }
+if ($role =="admin"){
+    header("Location: admin.php"); 
+    exit(); 
+}
+if($role == "user"){
+    header("Location: dashboard.php");
+    exit(); 
+}
+
 session_start();
-$userDetails = ["email" => $email, 'password' =>$hased, "fn"=>$fn, "ln"=>$ln];
+$userDetails = ["email" => $email, "user"=>$user, 'password' =>$hased, "fn"=>$fn, "ln"=>$ln];
 $_SESSION['userDetails'] = $userDetails;
-header("Location: ../newFF/login.php");
+header("Location: ../newFF/dashboard.php");
+
+session_start();
+$userDetails = ["email"=> $email, "admin"=>$admin, 'password' =>$hased, "fn"=>$fn, "ln"=>$ln];
+$_SESSION["userDetails"] = $userDetails;
+header("Location: ../newFF/admin.php"); 
 
 // echo $fn;
 //Email_filter_var 

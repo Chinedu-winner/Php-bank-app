@@ -7,6 +7,7 @@ function displayError($message){
     header("Location:login.php?error=$message");
     exit();
 };
+// function ;
 
 if (isset($_POST['login'])){
 $email = $POST['email'];
@@ -15,7 +16,7 @@ $password= $_POST['password'];
 if($email !== $user[0]['email']){
     echo "User email not correct";
     // die; 
-}
+}; 
 
 if(!password_verify($password, $user['password'])){
     echo "User password not correct";
@@ -32,7 +33,7 @@ $token = bin2hex(random_bytes(16));
 echo $token . "<br/>"; 
 $token_exp = time() + 30;
 echo time(); 
-$loggeredInUser = ["fn"=>$user['fn'], "ln"=>$user('ln'), 'token' =>$token, "token-exp"];
+$loggeredInUser = ["fn"=>$user='fn', "ln"=>$user='ln', 'token' =>$token, "token_exp" =>$token_exp];
 ?>
 
 <DOCTYPE html>

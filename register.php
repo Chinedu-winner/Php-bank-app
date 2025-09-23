@@ -17,7 +17,7 @@
                 echo "<div class='alert alert-danger'>$_GET[anything]</div>";
             }
         ?>
-        <h2>Register User</h2>
+        <h2 class="text-center bg-success p-1">Register User</h2>
         <div>
             <label class="text-dark" for="">First name</label>
             <input class="form-control" name="first_name" id="">
@@ -45,6 +45,14 @@
         <div>   
             <label class="text-dark" for="">Address</label>
             <input class="form-control" name="text" id="">
+        </div>
+        <div class="mb-3">
+           <label for="role" class="form-label">Select Role</label>
+           <select class="form-select" name="role">
+             <option value="admin">Admin</option>
+             <option value="user">User</option>
+           </select>
+       </div>
         </div>
         <div>
             <button class="btn mt-2 btn-dark w-100">Register</button>
