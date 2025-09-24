@@ -49,8 +49,15 @@
         <div class="mb-3">
            <label for="role" class="form-label">Select Role</label>
            <select class="form-select" name="role">
-             <option value="admin">Admin</option>
-             <option value="user">User</option>
+               <option value="user">Select Role</option>
+               <option value="user">User</option>
+               <option value="admin">Admin</option>
+           </select>
+           <div class="mb-3">
+           <label for="role" class="form-label">Gender</label>
+           <select class="form-select" name="gender">
+               <option value="male">Male</option>
+               <option value="female">Female</option>
            </select>
        </div>
         </div>

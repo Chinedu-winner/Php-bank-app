@@ -3,6 +3,16 @@ session_start();
 $user = $_SESSION['userDetails'];
 print_r($user);
 
+$query = "SELECT * FROM users";
+$database = mysqli_connect('localhost', 'root', 'root', 'bank-app');
+
+if($response){
+  echo 'Connected';
+}else {
+  echo "Not connected"; 
+  displayError('Database not connected'); 
+}
+
 function displayError($message){
     header("Location:login.php?error=$message");
     exit();
@@ -70,8 +80,10 @@ $loggeredInUser = ["fn"=>$user='fn', "ln"=>$user='ln', 'token' =>$token, "token_
               <div class="col-12 d-grid mt-3">
                 <button type="login" class="btn btn-primary btn-lg">Login</button>
               </div>
+              <div>
+                <p>Don't have an account</p>
+              </div>
             </form>
-
           </div>
         </div>
       </div>

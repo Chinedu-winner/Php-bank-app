@@ -5,6 +5,9 @@ $email = $_POST['email'];
 $password = $_POST['password'];
 $c_password = $_POST['c_password'];
 $role = $_POST['role'];
+$address = $_POST['address'];
+$phone = $_POST['phone'];
+$dob = $_POST['dob'];
 
 function displayError($message){
     header("Location: ../register.php?anything= $message");
@@ -46,13 +49,10 @@ if ($password != $c_password){
     exit();
 }
 if ($role =="admin"){
-    header("Location: admin.php"); 
+    header("Location: ../newFF/admin.php"); 
     exit(); 
 }
-if($role == "user"){
-    header("Location: dashboard.php");
-    exit(); 
-}
+
 
 session_start();
 $userDetails = ["email" => $email, "user"=>$user, 'password' =>$hased, "fn"=>$fn, "ln"=>$ln];
@@ -63,6 +63,33 @@ session_start();
 $userDetails = ["email"=> $email, "admin"=>$admin, 'password' =>$hased, "fn"=>$fn, "ln"=>$ln];
 $_SESSION["userDetails"] = $userDetails;
 header("Location: ../newFF/admin.php"); 
+
+if($role == "user"){
+    header("Location: ../newFF/dashboard.php");
+    exit(); 
+}
+
+$hased = password_hash($password, PASSWORD_DEFAULT);
+// $database = mysqli_connect("host_name", "username", 'password', "");
+$database = mysqli_connect('localhost', 'root', 'root', 'bank-app');
+
+if($database){
+    echo 'conected';
+}else {
+    echo 'Not connected';
+    displayError("Database not connect"); 
+}
+
+$sql_query = "INSERT INTO users (first_name, last_name, email, password, phone_number, address, role, dob)
+VALUES ('$fn','$ln', '$email', '$hased', '$phone', '$role', '$dob')";
+$response = mysqli_query($database, $sql_query); 
+if($response){
+    session_start(); 
+    $userDetails = ['email' =>$email, "password"=>$hased, "fn"=>$fn, "ln"=>$ln];
+    $_SESSION['userDatails']; 
+    echo "user created successfully";
+    header("Location: ../login.php?success-user created"); 
+}
 
 // echo $fn;
 //Email_filter_var 
