@@ -48,10 +48,10 @@ if ($password != $c_password){
     header("Location: ../register.php?anything= Your password does not match");
     exit();
 }
-if ($role =="admin"){
-    header("Location: ../newFF/admin.php"); 
-    exit(); 
-}
+// if ($role =="admin"){
+//     header("Location: ../newFF/admin.php"); 
+//     exit(); 
+// }
 
 
 session_start();
@@ -59,12 +59,14 @@ $userDetails = ["email" => $email, "user"=>$user, 'password' =>$hased, "fn"=>$fn
 $_SESSION['userDetails'] = $userDetails;
 header("Location: ../newFF/dashboard.php");
 
-session_start();
-$userDetails = ["email"=> $email, "admin"=>$admin, 'password' =>$hased, "fn"=>$fn, "ln"=>$ln];
-$_SESSION["userDetails"] = $userDetails;
-header("Location: ../newFF/admin.php"); 
+// session_start();
+// $userDetails = ["email"=> $email, "admin"=>$admin, 'password' =>$hased, "fn"=>$fn, "ln"=>$ln];
+// $_SESSION["userDetails"] = $userDetails;
+// header("Location: ../newFF/admin.php"); 
 
 if($role == "user"){
+    $_SESSION["token"] = $token;
+    $token = bin2hex(random_bytes(16));
     header("Location: ../newFF/dashboard.php");
     exit(); 
 }

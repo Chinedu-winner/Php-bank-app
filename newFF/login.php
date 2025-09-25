@@ -3,20 +3,20 @@ session_start();
 $user = $_SESSION['userDetails'];
 print_r($user);
 
-$query = "SELECT * FROM users";
-$database = mysqli_connect('localhost', 'root', 'root', 'bank-app');
+$database = mysqli_connect('localhost', 'root', '', 'bank-app');
 
-if($response){
+if($database){
   echo 'Connected';
 }else {
   echo "Not connected"; 
   displayError('Database not connected'); 
 }
 
-function displayError($message){
-    header("Location:login.php?error=$message");
-    exit();
-};
+// $query = "SELECT * FROM users";
+$query = "SELECT email, password, first_name, last_name FROM users";
+$response = mysqli_query($database, $query); 
+
+
 // function ;
 
 if (isset($_POST['login'])){
@@ -25,8 +25,13 @@ $password= $_POST['password'];
 
 if($email !== $user[0]['email']){
     echo "User email not correct";
-    // die; 
+    print_r("db_user"); 
 }; 
+
+function displayError($message){
+    header("Location:login.php?error=$message");
+    exit();
+};
 
 if(!password_verify($password, $user['password'])){
     echo "User password not correct";
