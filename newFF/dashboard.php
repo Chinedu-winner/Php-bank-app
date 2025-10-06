@@ -28,6 +28,7 @@ if (isset($_SESSION['logout'])){
     <title>Document</title>
 </head>
 <body>
+    <?php include 'components/navbar.html'?>
     <form action="">
         <div class="container py-5 text-center">
         <h1 class=" fw-bold text-bold">Welcome to the dashboard <?php echo "$user[fn] $user[ln]"?></h1>

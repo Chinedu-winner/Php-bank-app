@@ -52,7 +52,7 @@
                <option value="user">User</option>
                <option value="admin">Admin</option>
            </select>
-           <div class="mb-3">
+        <div class="mb-3">
            <label for="role" class="form-label">Gender</label>
            <select class="form-select" name="gender">
                <option value="male">Male</option>

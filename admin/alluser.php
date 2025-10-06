@@ -1,10 +1,27 @@
 <?php 
-if ($email){
-    echo 'Email already exists';
-}else{
-    echo 'Email is not available';
-}; 
-?>
+session_start();
+$loggedInUser = $_SESSION['loggenIn'];
+if(!$_SESSION['token'] || time()<$_SESSION['token_exp']){
+    header('Location: ../login.php?error=Your token has expired');
+    exit();
+}
+$email = $loggedInUser['email'];
+$datebase = mysqli_connect("localhost", "root", "", "bank-app");
+if (!$datebase){
+    echo "Database not connecting";
+}
+
+// File upload
+// $query = "SELECT user FROM users WHERE email='$email'";
+$query = "SELECT first_name, last_name, role FROM users WHERE email='$email'";
+// $db_user = mysqli_fetch_assoc($database, $query);
+$response = mysqli_query($database, $query);
+$db_user = mysqli_fetch_assoc($response);
+print_r($db_user);
+if ($db_user['role'] !== "admin") {
+    header("Location: ../dashboard.php");
+    exit;   
+}?>
 
 <!DOCTYPE html>
 <html lang="en">

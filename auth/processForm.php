@@ -59,7 +59,7 @@ $userDetails = ["email" => $email, "user"=>$user, 'password' =>$hased, "fn"=>$fn
 $_SESSION['userDetails'] = $userDetails;
 header("Location: ../newFF/dashboard.php");
 
-// session_start();
+// session_start();     
 // $userDetails = ["email"=> $email, "admin"=>$admin, 'password' =>$hased, "fn"=>$fn, "ln"=>$ln];
 // $_SESSION["userDetails"] = $userDetails;
 // header("Location: ../newFF/admin.php"); 

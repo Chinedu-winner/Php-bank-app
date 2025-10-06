@@ -16,16 +16,29 @@ if($database){
 $query = "SELECT email, password, first_name, last_name FROM users";
 $response = mysqli_query($database, $query); 
 
-
-// function ;
-
 if (isset($_POST['login'])){
 $email = $POST['email'];
 $password= $_POST['password'];
 
-if($email !== $user[0]['email']){
+//------------ A QUERY TO GET A SINGLE USER -------------
+    $query = "SELECT email, password, role FROM users WHERE email='$email'";
+    $response = mysqli_query($database, $query);
+    // $db_user = mysqli_fetch_all($response, MYSQLI_ASSOC); // get more than one information in your database
+    // $db_user [[], [], []]
+    $db_user = mysqli_fetch_assoc($response); // get just one information i your database []
+    print_r($db_user);
+
+    if ($email !==  $db_user['email']) {
+        echo "Incorrect email";
+        // return;
+    }
+    if (!password_verify($password, $db_user['password'])) {
+        displayError("Password not correct");
+    }
+
+if($email !== $db_user['email']){
     echo "User email not correct";
-    print_r("db_user"); 
+    print_r($db_user);
 }; 
 
 function displayError($message){
